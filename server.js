@@ -88,7 +88,7 @@ app.post('/send-whatsapp', async (req, res) => {
 
 const PORT = process.env.PORT || 3000; // Add this near the bottom for your app.listen
 
-const client = new Client({
+client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: { 
         args: [
