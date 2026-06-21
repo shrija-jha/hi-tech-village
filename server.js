@@ -9,16 +9,7 @@ app.use(express.json());
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: { 
-        args: [
-            '--no-sandbox', 
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--no-zygote',
-            '--single-process',
-            '--disable-gpu'
-        ]
-    }
+    puppeteer: { args: ['--no-sandbox'] }
 });
 
 client.on('qr', (qr) => {
@@ -95,7 +86,20 @@ app.post('/send-whatsapp', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+const PORT = process.env.PORT || 3000; // Add this near the bottom for your app.listen
+
+const client = new Client({
+    authStrategy: new LocalAuth(),
+    puppeteer: { 
+        args: [
+            '--no-sandbox', 
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process',
+            '--disable-gpu'
+        ]
+    }
 });
